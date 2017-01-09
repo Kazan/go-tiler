@@ -2,18 +2,22 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
 )
 
+const httpPort = 1337
+
 func main() {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/", RootEndpoint).Methods("GET")
 
-	log.Fatal(http.ListenAndServe(":1337", router))
+	log.Print(fmt.Sprintf("Starting server at %d", httpPort))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", httpPort), router))
 }
 
 // RootEndpoint ...
